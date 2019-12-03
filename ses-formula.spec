@@ -43,7 +43,7 @@ Requires(pre):  salt-master
 Salt Formula to deploy SES cluster.
 
 %prep
-%setup -q -n %{fname}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
 
