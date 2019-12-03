@@ -1,0 +1,17 @@
+ses:
+  $type: namespace
+  $name: SES
+
+  # ssh:
+  #   $type: group
+  #   $name: SSH Keys
+
+  #   private_key:
+  #     $name: Private Key
+  #     $type: text
+  #     $required: true
+
+  #   public_key:
+  #     $name: Public Key
+  #     $type: text
+  #     $required: true
