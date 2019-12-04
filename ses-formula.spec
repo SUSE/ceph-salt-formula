@@ -23,7 +23,7 @@ Version:        0.0.1
 Release:        1%{?dist}
 Summary:        SES Salt Formula
 Url:            https://github.com/rjfd/ses-formula
-License:        MIT
+License:        GPL-3.0
 Group:          System/Management
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -35,7 +35,6 @@ Requires(pre):  salt-formulas-configuration
 Requires(pre):  salt-master
 %endif
 
-# This would be better with a macro that just strips "-formula" from {name}
 %define fname ses
 %define fdir  %{_datadir}/salt-formulas
 
@@ -49,12 +48,26 @@ Salt Formula to deploy SES cluster.
 
 %install
 mkdir -p %{buildroot}%{fdir}/states/%{fname}/
+mkdir -p %{buildroot}%{fdir}/metadata/%{fname}/
 cp -R states/* %{buildroot}%{fdir}/states/%{fname}/
+cp metadata/* %{buildroot}%{fdir}/metadata/%{fname}/
 
 mkdir -p %{buildroot}%{_datadir}/%{fname}/pillar
-cp metadata/pillar.example %{buildroot}%{_datadir}/%{fname}/pillar/
 
-cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar.conf
+# pillar top sls file
+cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar/top.sls
+base:
+  '*':
+    - ses
+EOF
+
+# empty ses.sls file
+cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar/ses.sls
+ses:
+
+EOF
+
+cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar.conf.example
 pillar_roots:
   base:
     - /srv/pillar
@@ -67,8 +80,10 @@ EOF
 %doc README.md
 %dir %attr(0755, root, salt) %{fdir}/
 %dir %attr(0755, root, salt) %{fdir}/states/
+%dir %attr(0755, root, salt) %{fdir}/metadata/
 %dir %attr(0755, root, root) %{_datadir}/%{fname}
 %{fdir}/states/
+%{fdir}/metadata/
 %{_datadir}/%{fname}
 
 %changelog
