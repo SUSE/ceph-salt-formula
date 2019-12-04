@@ -19,6 +19,9 @@ run ceph-daemon bootstrap:
   cmd.run:
     - name: |
         ceph-daemon --verbose bootstrap --mon-ip {{ grains['fqdn_ip4'][0] }} \
+{% if 'container' in pillar['ses'] and 'ceph' in pillar['ses']['container']['images'] %}
+                    --image {{ pillar['ses']['container']['images']['ceph'] }} \
+{% endif %}
                     --initial-dashboard-user admin \
                     --initial-dashboard-password admin \
                     --output-keyring /etc/ceph/ceph.client.admin.keyring \
