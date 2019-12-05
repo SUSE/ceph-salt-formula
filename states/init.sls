@@ -9,6 +9,9 @@ include:
 {% if pillar['ses'].get('deploy', {'mon': False}).get('mon', False) %}
     - .ceph-mon
 {% endif %}
+{% if pillar['ses'].get('deploy', {'mgr': False}).get('mgr', False) %}
+    - .ceph-mgr
+{% endif %}
 
 {% else %}
 
