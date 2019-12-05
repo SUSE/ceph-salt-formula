@@ -34,6 +34,8 @@ run ceph-daemon bootstrap:
 configure ssh orchestrator:
   cmd.run:
     - name: |
+        ceph config-key set mgr/ssh/ssh_identity_key -i ~/.ssh/id_rsa
+        ceph config-key set mgr/ssh/ssh_identity_pub -i ~/.ssh/id_rsa.pub
         ceph mgr module enable ssh && \
         ceph orchestrator set backend ssh && \
 {% for minion in pillar['ses']['minions'] %}
