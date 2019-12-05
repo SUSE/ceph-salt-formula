@@ -7,6 +7,13 @@ install ceph-daemon:
         - ceph-common
 {% endif %}
 
+{% if 'container' in pillar['ses'] and 'ceph' in pillar['ses']['container']['images'] %}
+download ceph container image:
+  cmd.run:
+    - name: |
+        podman pull {{ pillar['ses']['container']['images']['ceph'] }}
+{% endif %}
+
 {% if grains['id'] == pillar['ses']['bootstrap_mon'] %}
 /var/log/ceph:
   file.directory:
