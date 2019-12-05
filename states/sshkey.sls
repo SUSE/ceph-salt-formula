@@ -6,7 +6,7 @@
     - mode: 0700
     - makedirs: True
 
-{% if 'mon' in grains['ses']['roles'] %}
+{% if 'mgr' in grains['ses']['roles'] %}
 # private key
 /root/.ssh/id_rsa:
   file.managed:
