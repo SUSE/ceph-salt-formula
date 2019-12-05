@@ -38,7 +38,7 @@ configure ssh orchestrator:
         ceph config-key set mgr/ssh/ssh_identity_pub -i ~/.ssh/id_rsa.pub
         ceph mgr module enable ssh && \
         ceph orchestrator set backend ssh && \
-{% for minion in pillar['ses']['minions'] %}
+{% for minion in pillar['ses']['minions']['all'] %}
         ceph orchestrator host add {{ minion }} && \
 {% endfor %}
         true

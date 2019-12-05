@@ -6,6 +6,9 @@ include:
     - .sshkey
     - .time
     - .cephbootstrap
+{% if pillar['ses'].get('deploy', {'mon': False}).get('mon', False) %}
+    - .ceph-mon
+{% endif %}
 
 {% else %}
 
