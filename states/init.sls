@@ -5,7 +5,9 @@ include:
     - .apparmor
     - .sshkey
     - .time
+{% if pillar['ses'].get('deploy', {'bootstrap': True}).get('bootstrap', True) %}
     - .cephbootstrap
+{% endif %}
 {% if pillar['ses'].get('deploy', {'mon': False}).get('mon', False) %}
     - .ceph-mon
 {% endif %}
