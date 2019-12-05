@@ -15,6 +15,9 @@ include:
 {% if pillar['ses'].get('deploy', {'mgr': False}).get('mgr', False) %}
     - .ceph-mgr
 {% endif %}
+{% if pillar['ses'].get('deploy', {'osd': False}).get('osd', False) %}
+    - .ceph-osd
+{% endif %}
 {% endif %}
 
 {% else %}
