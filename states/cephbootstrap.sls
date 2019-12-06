@@ -22,6 +22,8 @@ download ceph container image:
     - mode: 0770
     - makedirs: True
 
+{% set dashboard_username = pillar['ses'].get('dashboard', {'username': 'admin'}).get('username', 'admin') %}
+
 run ceph-daemon bootstrap:
   cmd.run:
     - name: |
@@ -29,6 +31,7 @@ run ceph-daemon bootstrap:
         CEPH_DAEMON_IMAGE={{ pillar['ses']['container']['images']['ceph'] }} \
 {%- endif %}
         ceph-daemon --verbose bootstrap --mon-ip {{ grains['fqdn_ip4'][0] }} \
+                    --initial-dashboard-user {{ dashboard_username }} \
                     --output-keyring /etc/ceph/ceph.client.admin.keyring \
                     --output-config /etc/ceph/ceph.conf \
                     --skip-ssh > /var/log/ceph/ceph-daemon.log 2>&1
