@@ -29,14 +29,22 @@ run ceph-daemon bootstrap:
         CEPH_DAEMON_IMAGE={{ pillar['ses']['container']['images']['ceph'] }} \
 {%- endif %}
         ceph-daemon --verbose bootstrap --mon-ip {{ grains['fqdn_ip4'][0] }} \
-                    --initial-dashboard-user admin \
-                    --initial-dashboard-password admin \
                     --output-keyring /etc/ceph/ceph.client.admin.keyring \
                     --output-config /etc/ceph/ceph.conf \
                     --skip-ssh > /var/log/ceph/ceph-daemon.log 2>&1
     - creates:
       - /etc/ceph/ceph.conf
       - /etc/ceph/ceph.client.admin.keyring
+
+{% set dashboard_password = pillar['ses'].get('dashboard', {'password': None}).get('password', None) %}
+{% if dashboard_password %}
+set ceph-dashboard password:
+  cmd.run:
+    - name: |
+        ceph dashboard ac-user-set-password --force-password admin {{ dashboard_password }}
+    - onchanges:
+      - cmd: run ceph-daemon bootstrap
+{% endif %}
 
 configure ssh orchestrator:
   cmd.run:
