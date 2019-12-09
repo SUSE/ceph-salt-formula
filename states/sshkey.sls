@@ -3,7 +3,7 @@
   file.directory:
     - user: root
     - group: root
-    - mode: 0700
+    - mode: '0700'
     - makedirs: True
 
 {% if 'mgr' in grains['ses']['roles'] %}
@@ -12,7 +12,7 @@
   file.managed:
     - user: root
     - group: root
-    - mode: 0600
+    - mode: '0600'
     - contents_pillar: ses:ssh:private_key
 
 # public key
@@ -20,7 +20,7 @@
   file.managed:
     - user: root
     - group: root
-    - mode: 0644
+    - mode: '0644'
     - contents_pillar: ses:ssh:public_key
 {% endif %}
 

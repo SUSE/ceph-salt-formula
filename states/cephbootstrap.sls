@@ -19,7 +19,7 @@ download ceph container image:
   file.directory:
     - user: ceph
     - group: ceph
-    - mode: 0770
+    - mode: '0770'
     - makedirs: True
 
 {% set dashboard_username = pillar['ses'].get('dashboard', {'username': 'admin'}).get('username', 'admin') %}
