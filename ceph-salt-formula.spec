@@ -1,5 +1,5 @@
 #
-# spec file for package ses-formula
+# spec file for package ceph-salt-formula
 #
 # Copyright (c) 2017 SUSE LINUX GmbH, Nuernberg, Germany.
 #
@@ -18,12 +18,12 @@
 
 # See also http://en.opensuse.org/openSUSE:Specfile_guidelines
 
-Name:           ses-formula
+Name:           ceph-salt-formula
 Version:        0.0.1
 Release:        1%{?dist}
-Summary:        SES Salt Formula
-Url:            https://github.com/rjfd/ses-formula
-License:        GPL-3.0
+Summary:        Ceph Salt Formula
+Url:            https://github.com/SUSE/ceph-salt-formula
+License:        MIT
 Group:          System/Management
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -35,11 +35,11 @@ Requires(pre):  salt-formulas-configuration
 Requires(pre):  salt-master
 %endif
 
-%define fname ses
+%define fname ceph-salt
 %define fdir  %{_datadir}/salt-formulas
 
 %description
-Salt Formula to deploy SES cluster.
+Salt Formula to deploy Ceph clusters.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -58,12 +58,12 @@ mkdir -p %{buildroot}%{_datadir}/%{fname}/pillar
 cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar/top.sls
 base:
   '*':
-    - ses
+    - ceph-salt
 EOF
 
-# empty ses.sls file
-cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar/ses.sls
-ses:
+# empty ceph-salt.sls file
+cat <<EOF > %{buildroot}%{_datadir}/%{fname}/pillar/ceph-salt.sls
+ceph-salt:
 
 EOF
 

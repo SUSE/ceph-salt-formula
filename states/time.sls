@@ -1,4 +1,4 @@
-{% if pillar['ses']['time_server'].get('enabled', True) %}
+{% if pillar['ceph-salt']['time_server'].get('enabled', True) %}
 
 install chrony:
   pkg.installed:
@@ -14,7 +14,7 @@ service_reload:
 /etc/chrony.conf:
   file.managed:
     - source:
-        - salt://ses/files/chrony.conf.j2
+        - salt://ceph-salt/files/chrony.conf.j2
     - template: jinja
     - user: root
     - group: root

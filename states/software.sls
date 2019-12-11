@@ -1,4 +1,4 @@
-{% if pillar['ses'].get('upgrades', {'enabled': False})['enabled'] %}
+{% if pillar['ceph-salt'].get('upgrades', {'enabled': False})['enabled'] %}
 
 upgrade packages:
   module.run:

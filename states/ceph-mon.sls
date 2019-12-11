@@ -1,6 +1,6 @@
-{% if pillar['ses']['minions']['mon'] | length > 1 %}
-{% set mon_update_args = [pillar['ses']['minions']['mon'] | length | string] %}
-{% for minion, ip in pillar['ses']['minions']['mon'].items() %}
+{% if pillar['ceph-salt']['minions']['mon'] | length > 1 %}
+{% set mon_update_args = [pillar['ceph-salt']['minions']['mon'] | length | string] %}
+{% for minion, ip in pillar['ceph-salt']['minions']['mon'].items() %}
 {% if minion != grains['id'] %}
 {% if mon_update_args.append(minion + ":" + ip) %}{% endif %}
 {% endif %}
@@ -20,7 +20,7 @@ generate up-to-date ceph.conf:
 copy ceph.conf and keyring to other mons:
   cmd.run:
     - name: |
-{%- for minion, ip in pillar['ses']['minions']['mon'].items() %}
+{%- for minion, ip in pillar['ceph-salt']['minions']['mon'].items() %}
 {%- if minion != grains['id'] %}
         scp -o "StrictHostKeyChecking=no" /etc/ceph/ceph.conf root@{{ ip }}:/etc/ceph/
         scp -o "StrictHostKeyChecking=no" /etc/ceph/ceph.client.admin.keyring root@{{ ip }}:/etc/ceph/

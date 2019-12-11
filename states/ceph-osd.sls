@@ -1,4 +1,4 @@
-{% set dg_list = pillar['ses'].get('storage', {'drive_groups': []}).get('drive_groups', []) %}
+{% set dg_list = pillar['ceph-salt'].get('storage', {'drive_groups': []}).get('drive_groups', []) %}
 {% for dg_spec in dg_list %}
 
 deploy ceph osds ({{ loop.index }}/{{ dg_list | length }}):

@@ -1,21 +1,21 @@
-{% if 'ses' in grains and grains['ses']['member'] %}
+{% if 'ceph-salt' in grains and grains['ceph-salt']['member'] %}
 
 include:
     - .software
     - .apparmor
     - .sshkey
     - .time
-{% if pillar['ses'].get('deploy', {'bootstrap': True}).get('bootstrap', True) %}
+{% if pillar['ceph-salt'].get('deploy', {'bootstrap': True}).get('bootstrap', True) %}
     - .cephbootstrap
 {% endif %}
-{% if grains['id'] == pillar['ses']['bootstrap_mon'] %}
-{% if pillar['ses'].get('deploy', {'mon': False}).get('mon', False) %}
+{% if grains['id'] == pillar['ceph-salt']['bootstrap_mon'] %}
+{% if pillar['ceph-salt'].get('deploy', {'mon': False}).get('mon', False) %}
     - .ceph-mon
 {% endif %}
-{% if pillar['ses'].get('deploy', {'mgr': False}).get('mgr', False) %}
+{% if pillar['ceph-salt'].get('deploy', {'mgr': False}).get('mgr', False) %}
     - .ceph-mgr
 {% endif %}
-{% if pillar['ses'].get('deploy', {'osd': False}).get('osd', False) %}
+{% if pillar['ceph-salt'].get('deploy', {'osd': False}).get('osd', False) %}
     - .ceph-osd
 {% endif %}
 {% endif %}
