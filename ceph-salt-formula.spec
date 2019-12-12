@@ -19,7 +19,7 @@
 # See also http://en.opensuse.org/openSUSE:Specfile_guidelines
 
 Name:           ceph-salt-formula
-Version:        0.1.0
+Version:        0.1.1
 Release:        1%{?dist}
 Summary:        Ceph Salt Formula
 Url:            https://github.com/SUSE/ceph-salt-formula
