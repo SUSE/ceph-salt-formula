@@ -1,3 +1,8 @@
+install iputils:
+  pkg.installed:
+    - pkgs:
+      - iputils
+
 {% if pillar['ceph-salt'].get('upgrades', {'enabled': False})['enabled'] %}
 
 upgrade packages:
