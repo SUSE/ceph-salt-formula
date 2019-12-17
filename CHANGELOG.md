@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2019-12-17
+### Changed
+- software: install iputils package in all cluster minions
+- install the SSH private and public key in bootstrap MON minion
+
 ## [0.1.1] - 2019-12-12
 ### Changed
 - Rename ceph-daemon to cephadm
@@ -33,7 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RPM spec file.
 - Minimal README.
 
-[Unreleased]: https://github.com/SUSE/ceph-bootstrap/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/SUSE/ceph-bootstrap/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/SUSE/ceph-bootstrap/releases/tag/v0.1.2
 [0.1.1]: https://github.com/SUSE/ceph-bootstrap/releases/tag/v0.1.1
 [0.1.0]: https://github.com/SUSE/ceph-bootstrap/releases/tag/v0.1.0
 [0.0.1]: https://github.com/SUSE/ceph-bootstrap/releases/tag/v0.0.1
